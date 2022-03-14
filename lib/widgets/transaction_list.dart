@@ -23,7 +23,8 @@ class TransactionList extends StatelessWidget {
               ],
             );
           })
-        : ListView.builder(
+        : ReorderableListView.builder(
+            onReorder: (oldIndex, newIndex) {},
             itemBuilder: buildListItem,
             itemCount: _transactions.length,
           );
@@ -31,6 +32,8 @@ class TransactionList extends StatelessWidget {
 
   Widget buildListItem(BuildContext ctx, int index) {
     return TransactionListItem(
-        transaction: _transactions[index], removeTransactionHandler: _removeTransactionHandler);
+        key: ValueKey(_transactions[index].id),
+        transaction: _transactions[index],
+        removeTransactionHandler: _removeTransactionHandler);
   }
 }
